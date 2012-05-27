@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/Audiere'
+
+if ARGV.length == 0
+  puts "player <fileName> [deviceName]"
+  exit
+end
+
+deviceName = ""
+deviceName = ARGV[1] if ARGV[1]
+
+device = Audiere::AudioDevicePtr::new(Audiere::OpenDevice(deviceName))
+if !device.get
+  puts "Error: OpenDevice() failed."
+  exit
+end
+
+puts device.getName()
+
+sound = Audiere::OutputStreamPtr.new(Audiere::OpenSound(device, ARGV[0]))
+if !sound.get
+  puts "Error: OpenSound() failed."
+  exit
+end
+
+puts "Length: #{sound.getLength()}"
+sound.play()
+
+while sound.isPlaying()
+  if sound.isSeekable()
+    puts "position: #{sound.getPosition()}"
+  end
+  sleep(1)
+end
