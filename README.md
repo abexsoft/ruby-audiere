@@ -32,6 +32,7 @@ How to compile
 
  $ rake download  
  $ rake compile  
+ $ rake build  
  $ rake package  
  $ sudo gem pkd/ruby-audiere-0.0.1-\<arch>.gem  
 
