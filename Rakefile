@@ -77,6 +77,7 @@ spec = Gem::Specification.new do |s|
  
   # The list of files to be contained in the gem 
   s.files = FileList['Rakefile',
+                     'lib/*',
                      'ext/extconf.rb',
                      'ext/interface/Makefile',
                      'ext/interface/*.i',
